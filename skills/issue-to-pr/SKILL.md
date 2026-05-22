@@ -1,6 +1,6 @@
 ---
 name: issue-to-pr
-description: Convert GitHub issues, bug reports, feature requests, and refactor tasks into structured implementation plans, test plans, PR descriptions, and reviewer checklists.
+description: Convert GitHub issues, bug reports, feature requests, refactor tasks, documentation requests, performance concerns, security concerns, and maintenance tasks into structured implementation plans, test plans, PR descriptions, and reviewer checklists before code changes begin.
 ---
 
 # Issue to PR Skill
@@ -18,6 +18,24 @@ The goal is not to rush into code changes. The goal is to make the work understa
 5. Make risks, non-goals, and testing explicit.
 6. Produce output that can be copied into a GitHub PR.
 7. Avoid over-engineering unless the issue clearly requires architectural work.
+
+## Do and don't
+
+Do:
+
+- Separate facts, assumptions, and open questions.
+- Inspect the repository before naming exact files when codebase access is available.
+- Keep the plan scoped to the smallest safe change that solves the issue.
+- Include test gaps and manual checks when automation is not practical.
+- Make security, compatibility, accessibility, and regression risks explicit when relevant.
+
+Don't:
+
+- Jump directly into implementation.
+- Invent exact files, commands, failures, test results, or maintainer intent.
+- Promise that tests pass unless they were actually run.
+- Expand the issue into an unrelated refactor or redesign.
+- Hide uncertainty; mark it as an assumption or question.
 
 ## Workflow
 
@@ -56,6 +74,14 @@ Write a PR description with Summary, Changes, Testing, Risk, and Related Issue. 
 ### 9. Generate a reviewer checklist
 
 Create a short checklist for reviewers focused on correctness, scope control, regression risk, and test coverage.
+
+## Bundled resources
+
+- Use `OUTPUT_FORMAT.md` when the user needs a stricter copyable output shape.
+- Use `templates/pr-description.md` when the user specifically asks for PR text.
+- Use `templates/test-plan.md` when the main deliverable is testing guidance.
+- Use `templates/review-checklist.md` when the user asks for reviewer guidance.
+- Use `examples/` to mirror tone and structure for common issue types.
 
 ## Default output format
 
@@ -148,3 +174,7 @@ When the issue is vague, still produce a useful first-pass plan. Add assumptions
 ## Handling codebase access
 
 If the repository is available, inspect the relevant files before naming exact affected files. If the repository is not available, describe likely areas at a conceptual level and avoid false certainty.
+
+## When not to use this skill
+
+Do not use this skill as a full implementation agent, automatic PR opener, or replacement for repository investigation. If the user asks to implement the issue immediately, use this skill first only when planning, risk framing, or PR drafting is materially useful.

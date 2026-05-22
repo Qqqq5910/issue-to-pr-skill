@@ -1,12 +1,20 @@
 # Issue to PR Skill
 
-A lightweight agent skill that turns messy GitHub issues into clear implementation plans, test plans, and pull request descriptions for AI coding agents.
+A lightweight, planning-first agent skill that turns messy GitHub issues into clear implementation plans, test plans, pull request descriptions, and reviewer checklists for AI coding agents.
 
 ## Why this exists
 
 AI coding agents are good at editing code, but they often struggle when the issue is vague, the repository is unfamiliar, or the expected PR standard is not explicit.
 
 This skill gives agents a repeatable planning workflow before implementation begins.
+
+## How this is different
+
+This is not an automatic "fix the issue and open a PR" bot.
+
+`issue-to-pr` is designed to be a planning and review-prep layer for Codex, Claude Code, Cursor, and similar coding agents. It helps an agent slow down long enough to separate facts from assumptions, name risks, define tests, and produce a PR description that a maintainer can actually review.
+
+Use it before implementation when the issue is unclear, high-risk, or likely to be over-engineered by an eager coding agent.
 
 ## What it does
 
@@ -25,6 +33,13 @@ This skill gives agents a repeatable planning workflow before implementation beg
 - AI coding agent users
 - Claude Code, Cursor, Codex, and similar workflows
 - Contributors working on unfamiliar repositories
+
+## Not for
+
+- Fully automated issue fixing without human review
+- Replacing codebase investigation or maintainer judgment
+- Generating fake certainty about files, tests, or behavior that have not been inspected
+- Large architectural rewrites unless the issue clearly asks for them
 
 ## Quick example
 
@@ -105,15 +120,30 @@ skills/issue-to-pr/examples/
 
 ## How to use
 
-Copy the `skills/issue-to-pr` folder into your agent skills directory, then ask your agent to use the `issue-to-pr` skill on a GitHub issue, bug report, feature request, or refactor task.
+Copy the `skills/issue-to-pr` folder into your agent skills directory, then ask your agent to use the `issue-to-pr` skill on a GitHub issue, bug report, feature request, refactor task, performance concern, security concern, or documentation task.
 
-Example prompt:
+Example prompts:
 
 ```text
 Use the issue-to-pr skill on this issue:
 
 Bug: Login button does not work on mobile Safari.
 When tapped, nothing happens. It works on desktop Chrome.
+```
+
+```text
+Use the issue-to-pr skill on GitHub issue #42.
+First inspect the repository, then produce an implementation plan, test plan, and PR description.
+```
+
+```text
+Use the issue-to-pr skill for this vague maintainer request.
+Separate facts from assumptions and list open questions before planning implementation.
+```
+
+```text
+Use the issue-to-pr skill on this security-sensitive bug report.
+Do not propose a fix until risks, non-goals, and test coverage are explicit.
 ```
 
 ## Templates included
@@ -127,6 +157,10 @@ When tapped, nothing happens. It works on desktop Chrome.
 - Bug issue
 - Feature request
 - Refactor task
+- Flaky test issue
+- Performance regression
+- Security-sensitive issue
+- Vague maintainer request
 
 ## License
 
